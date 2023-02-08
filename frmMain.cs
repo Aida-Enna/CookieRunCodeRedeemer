@@ -69,6 +69,7 @@ namespace CookieRunRedeemer
             rtbResponse.AppendText("[ERROR] ");
             rtbResponse.SelectionColor = Color.Black;
             rtbResponse.AppendText(ErrorMessage + Environment.NewLine);
+            rtbResponse.ScrollToCaret();
         }
 
         public void LogSuccess(string Message)
@@ -76,11 +77,13 @@ namespace CookieRunRedeemer
             rtbResponse.SelectionColor = Color.Green;
             rtbResponse.AppendText(Message + Environment.NewLine);
             rtbResponse.SelectionColor = Color.Black;
+            rtbResponse.ScrollToCaret();
         }
 
         public void Log(string Message)
         {
             rtbResponse.AppendText(Message + Environment.NewLine);
+            rtbResponse.ScrollToCaret();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -116,6 +119,20 @@ namespace CookieRunRedeemer
         private void btnRepo_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/Aida-Enna/CookieRunCodeRedeemer");
+        }
+
+        private void txtUserID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                btnRedeem.PerformClick();
+            }
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            btnFillCodes.PerformClick();
+            txtUserID.Focus();
         }
     }
 
